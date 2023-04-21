@@ -1,2 +1,5 @@
 # YADRO_test_task
-test task for YADRO
+
+This is test task for YADRO.
+
+to build it u should make cMake file -CMakeLists.txt.
