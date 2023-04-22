@@ -3,16 +3,16 @@
 int main(int argc, char *argv[]) {
 try {
     game_club club;
-    string filename;
+    std::string filename;
     club.input_from_file("input.txt");
    // club.input_from_file(argv[1]);
     club.revenue_calculation();
     return 0;
 } catch ( const myException& e){
-    cout << "Error occurred: " << e.what() << endl;
+    std::cerr << "Error occurred: " << e.what() << std::endl;
     return 0;
-} catch (const exception& e){
-    cout << "Some error occurred " << e.what() <<  endl;
+} catch (const std::exception& e){
+    std::cerr << "Some error occurred " << e.what() <<  std::endl;
     return 0;
 }
 }

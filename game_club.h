@@ -1,6 +1,7 @@
-//
-// Created by Kotozzavrik on 18.04.2023.
-//
+#ifndef YADRO_GAME_CLUB_H
+#define YADRO_GAME_CLUB_H
+
+
 #include <vector>
 #include <map>
 #include <string>
@@ -9,12 +10,8 @@
 #include <set>
 #include <deque>
 #include "myException.cpp"
+#include "tools.h"
 
-
-#ifndef YADRO_GAME_CLUB_H
-#define YADRO_GAME_CLUB_H
-
-using namespace std;
 
 class game_club {
 private:
@@ -23,43 +20,53 @@ private:
         int time;
         int action_id;
         int table_number;
-        string name;
+        std::string name;
     public:
-        actions() {table_number = 0;}
-        actions(int time, int id, string name) :time(time), action_id(id), name(name){}
+        actions() {
+            this->table_number = 0;
+            this->time = 0;
+            this->action_id = 0;
+            this->name = " ";
+        }
+        actions(int time, int id, std::string name) :time(time), action_id(id), name(name){}
         void set_table_number(int number){ this->table_number = number;}
         void set_time(int time)   { this->time = time;}
         void set_action_id(int id){ this->action_id = id;}
-        void set_name(string name){ this->name = name;}
+        void set_name(std::string name){ this->name = name;}
 
         int get_time() const { return time; }
         int get_action_id() const { return action_id; }
         int get_table_number() const { return table_number; }
-        const string &get_name() const { return name; }
+        const std::string &get_name() const { return name; }
 
 
-        friend ostream& operator << ( ostream& os, const actions& act){
-            time_to_format(act.get_time());
+        friend std::ostream& operator << ( std::ostream& os, const actions& act){
+            tools::time_to_format(act.get_time());
             os << " " << act.get_action_id() << " " << act.get_name();
             if(act.table_number != 0) os << " " << act.get_table_number();
-            os << endl;
+            os << std::endl;
             return os;
         }
 
 
     };
     int number_of_tables, cost_for_hour, open_time, close_time;
-    vector < int > events {1, 2, 3, 4, 11, 12, 13};
-    vector < actions > logs;
-    set <string> clients;
-    vector <string> tables;
-    deque <string> queue;
-    // table num time
-    multimap< int, int > margin;
-    vector <int> rubles;
+    std::vector < int > events {1, 2, 3, 4, 11, 12, 13};
+    std::vector < actions > logs;
+    std::set <std::string> clients;
+    std::vector <std::string> tables;
+    std::deque <std::string> queue;
+    // table money time
+    std::multimap< int, int > margin;
+    std::vector <int> rubles;
 
 public:
-    game_club() {}
+    game_club() {
+        this->open_time = 0;
+        this->close_time = 0;
+        this->cost_for_hour = 0;
+        this->number_of_tables =0;
+    }
     game_club(int n_tables, int cost, int open, int close, int input_size)
             : number_of_tables(n_tables), cost_for_hour(cost), open_time(open), close_time(close)
     {}
@@ -74,8 +81,7 @@ public:
     void set_open_time(int open)     { this->open_time = open; }
     void set_close_time(int close)   { this->close_time = close; }
 
-    void input_from_file(const string filename);
-    static void time_to_format( int time );
+    void input_from_file(const std::string filename);
     void revenue_calculation();
     void id_event( actions& action);
     void output_cost_hours();

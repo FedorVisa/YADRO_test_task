@@ -1,4 +1,10 @@
+#ifndef EXCEPTIONS_CPP
+#define EXCEPTIONS_CPP
+
+
 #include <exception>
+
+
 class myException : public std::exception {
 public:
 public:
@@ -39,3 +45,5 @@ public:
 private:
     ExceptionType m_type;
 };
+
+#endif

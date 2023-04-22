@@ -1,23 +1,21 @@
-//
-// Created by Kotozzavrik on 18.04.2023.
-//
-
 #include "game_club.h"
 #include <regex>
 #include <algorithm>
+
+using namespace std;
 
 
 void game_club::input_from_file(const string filename) {
     ifstream in(filename);
 
     if(!in.is_open()){
-        cout << "File does not exists";
+        cerr << "File does not exists";
         throw myException(myException::ExceptionType::FileNotFound);
     }
     try {
         in >> this->number_of_tables;
         if(number_of_tables < 1 ){
-            cout << "Yours input is: "<< number_of_tables << endl;
+            cerr << "Yours input is: "<< number_of_tables << endl;
             throw myException(myException::ExceptionType::WrongValue);
         }
         in.ignore();
@@ -27,20 +25,20 @@ void game_club::input_from_file(const string filename) {
         char delimiter;
         in >> time_hours >> delimiter >> time_minutes >> close_hours >> delimiter >> close_minutes;
         if (time_hours > 23 || time_minutes > 59 || time_hours < 0 || time_minutes < 0 ) {
-            cout << "Yours input is: "<< time_hours << ":" << time_minutes << endl;
+            cerr << "Yours input is: "<< time_hours << ":" << time_minutes << endl;
             throw myException(myException::ExceptionType::ExceededMaxValue);
         }
         //sum_time = time_hours * 60 + time_minutes;
         set_open_time(time_hours * 60 + time_minutes);
 
         if (close_hours > 23 || close_minutes > 59 || close_hours < 0 || close_minutes < 0 ) {
-            cout << "Yours input is: "<< close_hours << ":" << time_minutes << endl;
+            cerr << "Yours input is: "<< close_hours << ":" << time_minutes << endl;
             throw myException(myException::ExceptionType::ExceededMaxValue);
         }
         set_close_time(close_hours * 60 + close_minutes);
         in >> this->cost_for_hour;
         if(cost_for_hour <= 0 ){
-            cout << "Yours input is: "<< cost_for_hour << endl;
+            cerr << "Yours input is: "<< cost_for_hour << endl;
             throw myException(myException::ExceptionType::WrongValue);
         }
         in.clear();
@@ -56,32 +54,32 @@ void game_club::input_from_file(const string filename) {
         while (in >> time_hours >> delimiter >> time_minutes >> id >> name ) {
             table_num = 0;
             if (time_hours > 23 || time_minutes > 59 || time_hours < 0 || time_minutes < 0 ) {
-                cout << "Yours input is: "<< time_hours << ":" << time_minutes << endl;
+                cerr << "Yours input is: "<< time_hours << ":" << time_minutes << endl;
                 throw myException(myException::ExceptionType::ExceededMaxValue);
             }
             if( sum_time > time_hours * 60 + time_minutes && sum_time!= -1 ) {
-                cout << "Yours input is: "<< time_hours << ":" << time_minutes << endl;
+                cerr << "Yours input is: "<< time_hours << ":" << time_minutes << endl;
                 throw myException(myException::ExceptionType::WrongOrder);
             }
                 sum_time = time_hours * 60 + time_minutes;
                 action.set_time(sum_time);
 
             if(find(events.begin(), events.end(), id) == events.end()){
-                cout << "Yours input is: " << id << endl;
+                cerr << "Yours input is: " << id << endl;
                 throw myException(myException::ExceptionType::WrongId);
             }
             action.set_action_id(id);
 
             if(regex_match(name, pattern))action.set_name(name);
             else{
-                cout << "Yours input is: "<< name << endl;
+                cerr << "Yours input is: "<< name << endl;
                 throw myException(myException::ExceptionType::WrongName);
 
             }
             if( id == 2 ){
                 in >> table_num;
                 if( table_num > number_of_tables ){
-                    cout << "Yours input is: " << id << endl;
+                    cerr << "Yours input is: " << id << endl;
                     throw myException(myException::ExceptionType::WrongTableNum);
                 }
                 action.set_table_number(table_num);
@@ -98,15 +96,6 @@ void game_club::input_from_file(const string filename) {
     }
 }
 
-
-void  game_club::time_to_format( int time ){
-    string output_hours, output_minutes;
-    output_hours = to_string(time/60);
-    if(time/60 <10 ) output_hours = "0" + output_hours;
-    output_minutes = to_string(time%60);
-    if(time%60 <10 ) output_minutes = "0" + output_minutes;
-    cout << output_hours << ":" << output_minutes;
-}
 
 
 
@@ -153,7 +142,6 @@ void game_club::id_event( actions& action ){
                // queue.push_back(action.get_name());
                 action.set_action_id(13);
                 action.set_name("ICanWaitNoLonger");
-                //action.set_table_number(0);
                 cout << action;
             }
             else{
@@ -207,10 +195,10 @@ void game_club::id_event( actions& action ){
 
 
 void game_club::revenue_calculation(){
-    try {
+
         tables.resize(number_of_tables, " ");
         rubles.resize(number_of_tables,0);
-        time_to_format(open_time);
+        tools::time_to_format(open_time);
         cout << endl;
 
         for( auto i =0; i < logs.size(); i++){
@@ -246,20 +234,14 @@ void game_club::revenue_calculation(){
                 rubles[key-1] += cost_for_session * cost_for_hour;
             }
         }
-        time_to_format(close_time);
+        tools::time_to_format(close_time);
         cout << endl;
 
         for (int i = 0; i < number_of_tables; ++i) {
             cout << i+1 << " " << rubles[i] << " ";
-            time_to_format(time_for_session.at(i));
+            tools::time_to_format(time_for_session.at(i));
             cout << endl;
         }
-    }
-    catch (const myException& e){
-        cout << "Wrong input: " << e.what() << endl;
-        return;
-    }
-
 };
 
 
