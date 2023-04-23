@@ -7,6 +7,7 @@ This is test task for YADRO.
 Создать папку для сборки проекта:
 
 mkdir build
+
 cd build
 
 Выполнить команду cmake с указанием пути к CMakeLists.txt:
