@@ -4,8 +4,8 @@ int main(int argc, char *argv[]) {
 try {
     game_club club;
     std::string filename;
-    club.input_from_file("input.txt");
-    //club.input_from_file(argv[1]);
+    //club.input_from_file("input.txt");
+    club.input_from_file(argv[1]);
     club.revenue_calculation();
     return 0;
 } catch ( const myException& e){
