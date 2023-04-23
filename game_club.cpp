@@ -12,7 +12,6 @@ void game_club::input_from_file(const string filename) {
         cerr << "File does not exists";
         throw myException(myException::ExceptionType::FileNotFound);
     }
-    try {
         in >> this->number_of_tables;
         if(number_of_tables < 1 ){
             cerr << "Yours input is: "<< number_of_tables << endl;
@@ -87,13 +86,7 @@ void game_club::input_from_file(const string filename) {
             logs.push_back(action);
         }
         in.close();
-    }
-    catch (const myException& e){
-        throw e;
-    }
-    catch (const exception& e){
-        throw e;
-    }
+
 }
 
 

@@ -3,4 +3,4 @@ project(yadro)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_executable(yadro main.cpp game_club.cpp game_club.h myException.cpp tools.cpp tools.h)
+add_executable(yadro main.cpp game_club.cpp game_club.h myException.hpp tools.cpp tools.h)
