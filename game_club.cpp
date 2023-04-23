@@ -63,7 +63,7 @@ void game_club::input_from_file(const string filename) {
                 sum_time = time_hours * 60 + time_minutes;
                 action.set_time(sum_time);
 
-            if(find(events.begin(), events.end(), id) == events.end()){
+            if( !events.contains(id)){
                 cerr << "Yours input is: " << id << endl;
                 throw myException(myException::ExceptionType::WrongId);
             }

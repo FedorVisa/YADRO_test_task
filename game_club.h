@@ -15,6 +15,7 @@
 
 class game_club {
 private:
+
     class actions{
     private:
         int time;
@@ -50,13 +51,14 @@ private:
 
 
     };
+
     int number_of_tables, cost_for_hour, open_time, close_time;
-    std::vector < int > events {1, 2, 3, 4, 11, 12, 13};
+    std::set < int > events {1, 2, 3, 4, 11, 12, 13};
     std::vector < actions > logs;
     std::set <std::string> clients;
     std::vector <std::string> tables;
     std::deque <std::string> queue;
-    // table money time
+    // margin <table number, time> - time for each table session
     std::multimap< int, int > margin;
     std::vector <int> rubles;
 
@@ -65,7 +67,7 @@ public:
         this->open_time = 0;
         this->close_time = 0;
         this->cost_for_hour = 0;
-        this->number_of_tables =0;
+        this->number_of_tables = 0;
     }
     game_club(int n_tables, int cost, int open, int close, int input_size)
             : number_of_tables(n_tables), cost_for_hour(cost), open_time(open), close_time(close)
@@ -83,8 +85,8 @@ public:
 
     void input_from_file(const std::string filename);
     void revenue_calculation();
-    void id_event( actions& action);
-    void output_cost_hours();
+    void id_event( actions& action );
+
 };
 
 
