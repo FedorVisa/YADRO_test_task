@@ -1,6 +1,6 @@
 # YADRO_test_task
 
-This is test task for YADRO.
+Тестовое задание для компании YADRO.
 
 Для сборки проекта с помощью CMake на Linux, нужно выполнить следующие шаги:
 
