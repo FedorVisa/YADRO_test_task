@@ -32,9 +32,9 @@ make
 2. Через компилятор:
 ```
 g++ -o yadro_g++ main.cpp tools.cpp game_club.cpp myException.hpp -std=c++20
-
-На выходе получится файл yadro_g++.out (в Linux) или yadro_g++.exe (в Windows)
 ```
+На выходе получится файл yadro_g++.out (в Linux) или yadro_g++.exe (в Windows)
+
 ## Использование программы
 
 После успешной сборки, можно запустить с помощью команды:
