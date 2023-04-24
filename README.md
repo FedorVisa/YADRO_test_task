@@ -16,6 +16,10 @@ cd build
 ```
 git clone https://github.com/FedorVisa/YADRO_test_task.git
 ```
+## Собрать проект одним из следующих образов:
+
+1. Через cMake:
+
 Выполнить команду cmake с указанием пути к CMakeLists.txt:
 ```
 cmake < путь до файла >
@@ -23,6 +27,13 @@ cmake < путь до файла >
 Выполнить команду make для сборки проекта:
 ```
 make
+```
+
+2. Через компилятор:
+```
+g++ -o yadro_g++ main.cpp tools.cpp game_club.cpp myException.hpp -std=c++20
+
+На выходе получится файл yadro_g++.out (в Linux) или yadro_g++.exe (в Windows)
 ```
 ## Использование программы
 
