@@ -7,16 +7,15 @@
 1. Создать папку для сборки проекта:
 
 ```
-
 mkdir build
-cd build
 
+cd build
 ```
 
 Склонировать репозиторий  в папку:
-
-https://github.com/FedorVisa/YADRO_test_task.git
-
+```
+git clone https://github.com/FedorVisa/YADRO_test_task.git
+```
 Выполнить команду cmake с указанием пути к CMakeLists.txt:
 
 cmake < путь до файла >
