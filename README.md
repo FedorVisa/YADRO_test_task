@@ -10,6 +10,8 @@ mkdir build
 
 cd build
 
+Склонировать репозиторий.
+
 Выполнить команду cmake с указанием пути к CMakeLists.txt:
 
 
